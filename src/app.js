@@ -1,49 +1,70 @@
 console.log("app is running");
+const address = document.getElementById('app');
 
-let count=0;
-const addOne = ()=>{
-    count+=1;
-    console.log("clicked add", count);
-    renderCounterApp();
-    return;
+let app = {
+    title: "this is the title",
+    subtitle: "this line is the subtitle ok",
+    options: []
+};
+
+const onFormSubmit = (e) => {
+    e.preventDefault();
+    console.log('fuck you');
+    const option = e.target.elements.option.value;
+    if(option){
+        app.options.push(option);
+        e.target.elements.option.value='';
+        jsxRender();
+    }
+    
+
 }
-const subOne = ()=> {
-    count--;
-    renderCounterApp();
-    return;
 
+const removeAll = (e)=>{
+    e.preventDefault();
+    console.log('fuck everyone');
+    app.options =[];
+    jsxRender();
 }
-const reset = ()=>{
+const whatToDo =(e)=>{
+    const num = Math.floor(Math.random()*app.options.length);
+    const option = app.options[num];
 
-    count=0;
-    renderCounterApp();
-    return;
+    alert(option);
 }
 
-let username = 'Prateek Mishra'
 
 
-const renderCounterApp = ()=>{
-    let template = (
+
+
+const jsxRender = ()=>{
+    const template = (
         <div>
-            <h1>{username}</h1>
-            <h2>Hii i am starting with react</h2>
-            <h3>this is mee checking out jsx</h3>
-            <button onClick= {addOne}>+1</button>
-            <button onClick= {subOne}>-1</button>
-            <button onClick= {reset}>reset</button>
-            <h3>the number of total counts is: {count}</h3>
-            <h3>just checking</h3>
+            <h1>{app.title}</h1>
+            <p>{app.subtitle}</p>
+            <p>{app.options.length>0 ? 'here are the options' : 'there are no options you dum dum'}</p>
+            <p>{app.options.length}</p>
+            <button disabled = {app.options.length===0} onClick={whatToDo}>help me decide</button>
+            <button onClick={removeAll}>remove all</button>
+            <ol>
+                {
+                    app.options.map((option)=>{
+                        return <li key={option}>{option}</li>;
+                    })
+                }
+                
+            </ol>
+            <form onSubmit={onFormSubmit}>
+                <input type="text" name = "option"></input>
+                <button>add option</button>
+                
+            </form>
+    
         </div>
     );
-    var address = document.getElementById('app');
     ReactDOM.render(template, address);
-  }
 
 
 
-
-
-
-renderCounterApp();
-
+}
+jsxRender();

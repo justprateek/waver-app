@@ -1,76 +1,94 @@
 "use strict";
 
 console.log("app is running");
+var address = document.getElementById('app');
 
-var count = 0;
-var addOne = function addOne() {
-    count += 1;
-    console.log("clicked add", count);
-    renderCounterApp();
-    return;
-};
-var subOne = function subOne() {
-    count--;
-    renderCounterApp();
-    return;
-};
-var reset = function reset() {
-
-    count = 0;
-    renderCounterApp();
-    return;
+var app = {
+    title: "this is the title",
+    subtitle: "this line is the subtitle ok",
+    options: []
 };
 
-var username = 'Prateek Mishra';
+var onFormSubmit = function onFormSubmit(e) {
+    e.preventDefault();
+    console.log('fuck you');
+    var option = e.target.elements.option.value;
+    if (option) {
+        app.options.push(option);
+        e.target.elements.option.value = '';
+        jsxRender();
+    }
+};
 
-var renderCounterApp = function renderCounterApp() {
+var removeAll = function removeAll(e) {
+    e.preventDefault();
+    console.log('fuck everyone');
+    app.options = [];
+    jsxRender();
+};
+var whatToDo = function whatToDo(e) {
+    var num = Math.floor(Math.random() * app.options.length);
+    var option = app.options[num];
+
+    alert(option);
+};
+
+var jsxRender = function jsxRender() {
     var template = React.createElement(
         "div",
         null,
         React.createElement(
             "h1",
             null,
-            username
+            app.title
         ),
         React.createElement(
-            "h2",
+            "p",
             null,
-            "Hii i am starting with react"
+            app.subtitle
         ),
         React.createElement(
-            "h3",
+            "p",
             null,
-            "this is mee checking out jsx"
+            app.options.length > 0 ? 'here are the options' : 'there are no options you dum dum'
+        ),
+        React.createElement(
+            "p",
+            null,
+            app.options.length
         ),
         React.createElement(
             "button",
-            { onClick: addOne },
-            "+1"
+            { disabled: app.options.length === 0, onClick: whatToDo },
+            "help me decide"
         ),
         React.createElement(
             "button",
-            { onClick: subOne },
-            "-1"
+            { onClick: removeAll },
+            "remove all"
         ),
         React.createElement(
-            "button",
-            { onClick: reset },
-            "reset"
-        ),
-        React.createElement(
-            "h3",
+            "ol",
             null,
-            "the number of total counts is: ",
-            count
+            app.options.map(function (option) {
+                return React.createElement(
+                    "li",
+                    { key: option },
+                    option
+                );
+            })
         ),
         React.createElement(
-            "h3",
-            null,
-            "just checking"
+            "form",
+            { onSubmit: onFormSubmit },
+            React.createElement("input", { type: "text", name: "option" }),
+            React.createElement(
+                "button",
+                null,
+                "add option"
+            )
         )
     );
-    var address = document.getElementById('app');
     ReactDOM.render(template, address);
 };
-
-renderCounterApp();
+jsxRender();
