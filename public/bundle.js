@@ -1,1 +1,1 @@
-console.log("hello there!");
+(()=>{"use strict";console.log("utils is loaded!"),console.log("i am batman"),console.log(4*4)})();
