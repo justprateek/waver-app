@@ -1,23 +1,24 @@
 {
-  "name": "indecision",
+  "name": "indecision-app",
   "version": "1.0.0",
   "main": "index.js",
+  "author": "Andrew Mead",
   "license": "MIT",
   "scripts": {
     "serve": "live-server public/",
     "build": "webpack --watch",
-    "build-babel": "babel src/app.js --out-file=public/script/app.js --presets=env,react --watch"
+    "build-babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch"
   },
   "dependencies": {
-    "babel-preset": "^1.1.7",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "live-server": "^1.2.1"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "webpack": "^5.37.0",
-    "webpack-cli": "^4.7.0"
+    "babel-cli": "6.24.1",
+    "babel-core": "6.25.0",
+    "babel-loader": "7.1.1",
+    "babel-preset-env": "1.5.2",
+    "babel-preset-react": "6.24.1",
+    "live-server": "^1.2.0",
+    "react": "15.6.1",
+    "react-dom": "15.6.1",
+    "validator": "8.0.0",
+    "webpack": "3.1.0"
   }
 }

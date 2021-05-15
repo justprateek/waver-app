@@ -1,5 +1,6 @@
-// import './utils.js';
-import {square} from './utils.js';
+// install -> import -> use
+import React from 'react';
+import ReactDOM from 'react-dom';
+import IndecisionApp from './components/IndecisionApp'
 
-console.log('i am batman')
-console.log(square(4));
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
