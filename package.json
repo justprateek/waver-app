@@ -5,6 +5,7 @@
   "author": "Andrew Mead",
   "license": "MIT",
   "scripts": {
+    "start": "webpack-dev-server",
     "serve": "live-server public/",
     "build": "webpack",
     "dev-server": "webpack-dev-server"
